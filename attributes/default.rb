@@ -6,6 +6,7 @@ default["graphite"]["carbon"]["line_receiver_interface"]    = "127.0.0.1"
 default["graphite"]["carbon"]["pickle_receiver_interface"]  = "127.0.0.1"
 default["graphite"]["carbon"]["cache_query_interface"]      = "127.0.0.1"
 default["graphite"]["carbon"]["log_updates"]                = true
+default["graphite"]["carbon"]["storage_dir"]                = "#{node["graphite"]["home"]}/storage"
 default["graphite"]["carbon"]["whisper_dir"]                = "#{node["graphite"]["home"]}/storage/whisper"
 default["graphite"]["carbon"]["max_cache_size"]             = "inf"
 default["graphite"]["carbon"]["max_creates_per_minute"]     = "inf"

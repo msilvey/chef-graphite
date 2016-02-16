@@ -40,6 +40,7 @@ template "#{node['graphite']['home']}/webapp/graphite/local_settings.py" do
   group node["apache"]["group"]
   variables(
     :home           => node["graphite"]["home"],
+    :storage_dir    => node["graphite"]["carbon"]["storage_dir"],
     :whisper_dir    => node["graphite"]["carbon"]["whisper_dir"],
     :timezone       => node["graphite"]["dashboard"]["timezone"],
     :memcache_hosts => node["graphite"]["dashboard"]["memcache_hosts"],
@@ -63,7 +64,7 @@ web_app "graphite" do
   graphite_port node["graphite"]["port"]
 end
 
-directory "#{node['graphite']['home']}/storage/log" do
+directory "#{node['graphite']['carbon']['storage_dir']}/log" do
   owner node["apache"]["user"]
   group node["apache"]["group"]
 end
@@ -73,12 +74,12 @@ directory node['graphite']['carbon']['whisper_dir'] do
   group node["apache"]["group"]
 end
 
-directory "#{node['graphite']['home']}/storage/log/webapp" do
+directory "#{node['graphite']['carbon']['storage_dir']}/log/webapp" do
   owner node["apache"]["user"]
   group node["apache"]["group"]
 end
 
-cookbook_file "#{node['graphite']['home']}/storage/graphite.db" do
+cookbook_file "#{node['graphite']['carbon']['storage_dir']}/graphite.db" do
   owner node["apache"]["user"]
   group node["apache"]["group"]
   action :create_if_missing
@@ -86,7 +87,7 @@ end
 
 logrotate_app "dashboard" do
   cookbook "logrotate"
-  path "#{node['graphite']['home']}/storage/log/webapp/*.log"
+  path "#{node['graphite']['carbon']['storage_dir']}/log/webapp/*.log"
   frequency "daily"
   rotate 7
   create "644 root root"

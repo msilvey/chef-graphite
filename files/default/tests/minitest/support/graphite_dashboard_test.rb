@@ -21,7 +21,7 @@ describe_recipe "graphite::dashboard" do
     end
 
     it "creates the log storage directory" do
-      directory("#{node['graphite']['storage_dir']}/log/").must_exist
+      directory("#{node['graphite']['carbon']['storage_dir']}/log/").must_exist
     end
 
     it "creates the whisper storage directory" do
@@ -29,11 +29,11 @@ describe_recipe "graphite::dashboard" do
     end
 
     it "creates the webapp log storage directory" do
-      directory("#{node['graphite']['storage_dir']}/log/webapp/").must_exist
+      directory("#{node['graphite']['carbon']['storage_dir']}/log/webapp/").must_exist
     end
 
     it "creates the Graphite user database" do
-      file("#{node['graphite']['storage_dir']}/graphite.db").must_exist
+      file("#{node['graphite']['carbon']['storage_dir']}/graphite.db").must_exist
     end
   end
 

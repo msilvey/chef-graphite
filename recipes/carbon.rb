@@ -49,9 +49,9 @@ template "#{node['graphite']['home']}/conf/storage-aggregation.conf" do
 end
 
 execute "chown" do
-  command "chown -R #{node["apache"]["user"]}:#{node["apache"]["group"]} #{node['graphite']['storage_dir']}"
+  command "chown -R #{node["apache"]["user"]}:#{node["apache"]["group"]} #{node['graphite']['carbon']['storage_dir']}"
   only_if do
-    f = File.stat("#{node['graphite']['storage_dir']}")
+    f = File.stat("#{node['graphite']['carbon']['storage_dir']}")
     f.uid == 0 && f.gid == 0
   end
 end

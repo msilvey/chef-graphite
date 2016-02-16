@@ -62,6 +62,7 @@ web_app "graphite" do
   server_name "graphite"
   graphite_home node["graphite"]["home"]
   graphite_port node["graphite"]["port"]
+  storage_dir node["graphite"]["carbon"]["storage_dir"]
 end
 
 directory "#{node['graphite']['carbon']['storage_dir']}/log" do

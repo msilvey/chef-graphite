@@ -20,7 +20,7 @@ describe_recipe "graphite::carbon" do
     end
 
     it "changes the storage directory owner and group" do
-      storage = directory("#{node['graphite']['home']}/storage/")
+      storage = directory("#{node['graphite']['storage_dir']}/")
       storage.must_have(:owner, node["apache"]["user"])
       storage.must_have(:group, node["apache"]["group"])
     end

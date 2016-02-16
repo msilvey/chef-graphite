@@ -49,9 +49,9 @@ template "#{node['graphite']['home']}/conf/storage-aggregation.conf" do
 end
 
 execute "chown" do
-  command "chown -R #{node["apache"]["user"]}:#{node["apache"]["group"]} #{node['graphite']['home']}/storage"
+  command "chown -R #{node["apache"]["user"]}:#{node["apache"]["group"]} #{node['graphite']['storage_dir']}"
   only_if do
-    f = File.stat("#{node['graphite']['home']}/storage")
+    f = File.stat("#{node['graphite']['storage_dir']}")
     f.uid == 0 && f.gid == 0
   end
 end
@@ -61,7 +61,8 @@ template "/etc/init/carbon-cache.conf" do
   source "carbon-cache.conf.erb"
   variables(
     :home => node["graphite"]["home"],
-    :version => node["graphite"]["version"]
+    :version => node["graphite"]["version"],
+    :storage_dir => node["graphite"]["carbon"]["storage_dir"]
   )
 end
 

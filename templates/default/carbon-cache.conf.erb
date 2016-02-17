@@ -14,8 +14,7 @@ env PIDFILE=<%= @storage_dir %>/carbon-cache-a.pid
 # console output
 
 pre-start script
-  cd $GWD
-  $CMD --pidfile=$PIDFILE start
+  cd $GWD && $CMD --pidfile=$PIDFILE start
 end script
 
 post-stop script

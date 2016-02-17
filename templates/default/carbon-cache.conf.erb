@@ -6,6 +6,7 @@ description "carbon-cache v<%= @version %>"
 start on runlevel [2345]
 stop on runlevel [!2345]
 
+env GWD=<%= @home %>
 env CMD=<%= @home %>/bin/carbon-cache.py
 env PIDFILE=<%= @storage_dir %>/carbon-cache-a.pid
 
@@ -13,6 +14,7 @@ env PIDFILE=<%= @storage_dir %>/carbon-cache-a.pid
 # console output
 
 pre-start script
+  cd $GWD
   $CMD --pidfile=$PIDFILE start
 end script
 
